@@ -27,8 +27,8 @@ export class User {
   @Column()
   useraddress: string;
 
-  @Column()
-  usercharge: number;
+  @Column() // Campo para almacenar roles como un array de strings
+  roles: number;
 
   @Column()
   userstate: boolean;
