@@ -6,7 +6,7 @@ export const conexionPostgreSQL = TypeOrmModule.forRoot({
   host: process.env.PG_HOST,
   port: 4000,
   username: 'postgres',
-  password: '852456',
+  password: '',
   database: 'postgres',
   synchronize: false,
   entities: [User],
