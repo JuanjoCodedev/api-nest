@@ -16,6 +16,7 @@ interface getUserWithRoles extends Request {
 export class UserController {
   constructor(private userService: UserService) {}
 
+  @Auth(Role.USER)
   @Post('/crear-cuenta') //ruta: http://localhost:3000/user/registro-usuario
   async createUser(@Body() user: userDTO) {
     return await this.userService.createUser(user);
@@ -29,11 +30,13 @@ export class UserController {
     return userProfile;
   }
 
+  @Auth(Role.USER)
   @Patch('/modificar-cuenta/:uid') //ruta: http://localhost:3000/user/actualizar-usuario/:uid
   async updateUser(@Param('uid') uid: number, @Body() UpdatedPersonDTO: userUpdateDTO): Promise<User> {
     return await this.userService.updateUser(uid, UpdatedPersonDTO);
   }
 
+  @Auth(Role.USER)
   @Delete('/eliminar-cuenta/:uid') //ruta: http://localhost:3000/user/eliminar-usuario/:uid
   async deleteUser(@Param('uid') uid: number) {
     return await this.userService.deleteUser(uid);
