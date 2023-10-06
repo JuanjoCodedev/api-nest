@@ -13,6 +13,7 @@ export class UserService {
 
   async createUser(user: userDTO) {
     const { useremail } = user;
+
     const findUser = await this.userRepository.findOne({ where: { useremail } });
 
     if (findUser) throw new HttpException('El correo electrónico ya está registrado', 401);
@@ -21,20 +22,11 @@ export class UserService {
     return this.userRepository.save(createUser);
   }
 
-  async profile(useremail: string) {
-    const userRecord = await this.userRepository.findOne({ where: { useremail } });
+  async profile(uid: number): Promise<User> {
+    const userRecord = await this.userRepository.findOne({ where: { uid } });
     if (!userRecord) throw new UnauthorizedException('Usuario no encontrado');
 
     return userRecord;
-  }
-
-  async updateUser(@Param('uid') uid: number, updatedPersonDTO: Partial<userUpdateDTO>) {
-    const findUser = await this.userRepository.findOne({ where: { uid } });
-
-    if (!findUser) throw new HttpException('Usuario no encontrado o no existe', 404);
-
-    this.userRepository.merge(findUser, updatedPersonDTO);
-    return this.userRepository.save(findUser);
   }
 
   async deleteUser(@Param('uid') uid: number) {
