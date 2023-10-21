@@ -1,6 +1,8 @@
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './entity.user';
-import { Entrada, Salida, Stock } from 'src/almacen/almacen.entity';
+import { Stock } from 'src/almacen/stock/stock.entity';
+import { Salida } from 'src/almacen/output/output.entity';
+import { Entrada } from 'src/almacen/entry/entry.entity';
 
 export const conexionPostgreSQL = TypeOrmModule.forRoot({
   type: 'postgres',

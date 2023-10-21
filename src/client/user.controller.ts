@@ -2,8 +2,8 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, Req } from '@nestjs/
 import { UserService } from './user.service';
 import { userDTO } from './user.dto';
 import { Request } from 'express';
-import { Role } from 'src/auth/constants/role.enum';
-import { Auth } from 'src/auth/decorators/auth.decorator';
+import { Role } from 'src/autenticacion/constants/role.enum';
+import { Auth } from 'src/autenticacion/decorators/auth.decorator';
 
 interface getUserWithRoles extends Request {
   user: {
