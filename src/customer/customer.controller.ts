@@ -1,34 +1,30 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, Req } from '@nestjs/common';
-import { UserService } from './user.service';
-import { userDTO } from './user.dto';
+import { CustomerService } from './customer.service';
+import { userDTO } from './customer.dto';
 import { Request } from 'express';
 import { Role } from 'src/autenticacion/constants/role.enum';
 import { Auth } from 'src/autenticacion/decorators/auth.decorator';
+import { getCustomerWithRoles } from './interface/interface.customer';
 
-interface getUserWithRoles extends Request {
-  user: {
-    uid: number;
-  };
-}
-@Controller('user') // ruta: http://localhost:3000/user
-export class UserController {
-  constructor(private userService: UserService) {}
+@Controller('customer') // ruta: http://localhost:3000/customer
+export class CustomerController {
+  constructor(private userService: CustomerService) {}
 
-  @Post('/crear-cuenta') //ruta: http://localhost:3000/user/registro-usuario
+  @Post('/crear-cuenta') //ruta: http://localhost:3000/customer/crear-cuenta
   async createUser(@Body() user: userDTO) {
     return await this.userService.createUser(user);
   }
 
   @Auth(Role.USER)
-  @Get('/perfil') //ruta: http://localhost:3000/user/perfil
-  async getProfile(@Req() req: getUserWithRoles) {
+  @Get('/perfil') //ruta: http://localhost:3000/customer/perfil
+  async getProfile(@Req() req: getCustomerWithRoles) {
     const uid = req.user.uid;
     const userProfile = await this.userService.profile(uid);
     return userProfile;
   }
 
   @Auth(Role.USER)
-  @Delete('/eliminar-cuenta/:uid') //ruta: http://localhost:3000/user/eliminar-usuario/:uid
+  @Delete('/eliminar-cuenta/:uid') //ruta: http://localhost:3000/customer/eliminar-usuario/:uid
   async deleteUser(@Param('uid') uid: number) {
     return await this.userService.deleteUser(uid);
   }

@@ -13,4 +13,7 @@ export class Stock {
 
   @Column()
   estado: boolean;
+
+  @Column()
+  obra: string;
 }

@@ -11,6 +11,17 @@ export class StockService {
     private readonly stockRepository: Repository<Stock>,
   ) {}
 
+  async createStock(stockDto: UpdateQuantityDto) {
+    const newStock = this.stockRepository.create(stockDto);
+
+    try {
+      const stockSave = await this.stockRepository.save(newStock);
+      return stockSave;
+    } catch (error) {
+      throw new Error('Error al ingresar datos');
+    }
+  }
+
   async getStockId(id: number) {
     try {
       return await this.stockRepository.findOne({ where: { id } });

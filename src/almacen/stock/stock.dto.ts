@@ -4,4 +4,6 @@ export class UpdateQuantityDto {
   readonly cantidad: number;
 
   readonly estado: boolean;
+
+  readonly obra: string;
 }

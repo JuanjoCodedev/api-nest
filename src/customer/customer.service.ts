@@ -2,10 +2,10 @@ import { HttpException, Injectable, Param, UnauthorizedException } from '@nestjs
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from '../database/entity.user';
-import { userDTO, userUpdateDTO } from './user.dto';
+import { userDTO, userUpdateDTO } from './customer.dto';
 
 @Injectable()
-export class UserService {
+export class CustomerService {
   constructor(
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
